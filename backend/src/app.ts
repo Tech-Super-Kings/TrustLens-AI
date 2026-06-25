@@ -10,7 +10,12 @@ import { errorHandler, notFound } from './middleware/error.middleware.js';
 
 export const app = express();
 
-app.use(helmet());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+    frameguard: false,
+  }),
+);
 app.use(
   cors({
     origin: env.clientUrl,
@@ -19,7 +24,15 @@ app.use(
 );
 app.use(express.json({ limit: '1mb' }));
 app.use(morgan('dev'));
-app.use('/uploads', express.static(path.resolve(process.cwd(), 'uploads')));
+app.use(
+  '/uploads',
+  express.static(path.resolve(process.cwd(), 'uploads'), {
+    setHeaders: (res) => {
+      res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+      res.setHeader('Access-Control-Allow-Origin', env.clientUrl);
+    },
+  }),
+);
 
 app.get('/health', (_req, res) => {
   res.status(200).json({ success: true, message: 'TrustLens AI API is healthy' });

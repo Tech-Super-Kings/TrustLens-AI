@@ -65,6 +65,11 @@ You are TrustLens AI. Analyze this OCR-extracted credential data for authenticit
 Return structured JSON only with keys: authenticityScore, riskLevel, confidence, summary, issues, recommendations.
 Check formatting consistency, suspicious wording, impossible dates, missing fields, institution naming consistency, and explain anomalies.
 Do not claim certainty; provide risk-based analysis.
+Important parsing guidance:
+- Treat regulatory lines such as "Approved by AICTE", "Affiliated to", "Recognized by", "UGC", or accreditation text as metadata, not the institution name.
+- Treat generic words like "FACULTY", "CERTIFICATE", "GRADE", "DEPARTMENT", and headings as labels, not certificate numbers.
+- A certificate or registration number should usually contain digits and appear near labels such as Certificate No, Registration No, Roll No, or Enrollment No.
+- If an extracted field appears suspiciously generic, mention it as an issue instead of assuming it is correct.
 
 Extracted data:
 ${JSON.stringify(data, null, 2)}
