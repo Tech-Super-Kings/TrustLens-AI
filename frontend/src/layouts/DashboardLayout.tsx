@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { Bell, ChevronDown, LayoutDashboard, LogOut, Menu, Search, ShieldCheck, UserRound } from 'lucide-react';
+import { Bell, ChevronDown, FileSearch, FileUp, History, LogOut, Menu, Search, ShieldCheck, UserRound } from 'lucide-react';
 import { useState } from 'react';
 import { ThemeToggle } from '../components/ThemeToggle';
 import { useAuth } from '../contexts/AuthContext';
@@ -29,6 +29,7 @@ export const DashboardLayout = () => {
           TrustLens AI
         </div>
         <nav className="mt-8 space-y-2">
+          <p className="px-4 text-xs font-bold uppercase tracking-wide text-slate-400">Role Dashboards</p>
           {roles.map((role) => {
             const Icon = roleIcons[role];
             const isOwnRole = user?.role === role;
@@ -53,6 +54,45 @@ export const DashboardLayout = () => {
               </NavLink>
             );
           })}
+          <p className="px-4 pt-5 text-xs font-bold uppercase tracking-wide text-slate-400">Credential Intelligence</p>
+          {user && ['student', 'university', 'admin'].includes(user.role) && (
+            <NavLink
+              to="/credentials/upload"
+              onClick={() => setSidebarOpen(false)}
+              className={({ isActive }) =>
+                `flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-semibold transition ${
+                  isActive ? 'bg-brand-600 text-white' : 'text-slate-800 hover:bg-brand-50 dark:text-slate-100 dark:hover:bg-slate-800'
+                }`
+              }
+            >
+              <FileUp className="h-5 w-5" />
+              Upload Credential
+            </NavLink>
+          )}
+          <NavLink
+            to="/credentials/analysis"
+            onClick={() => setSidebarOpen(false)}
+            className={({ isActive }) =>
+              `flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-semibold transition ${
+                isActive ? 'bg-brand-600 text-white' : 'text-slate-800 hover:bg-brand-50 dark:text-slate-100 dark:hover:bg-slate-800'
+              }`
+            }
+          >
+            <FileSearch className="h-5 w-5" />
+            Credential Analysis
+          </NavLink>
+          <NavLink
+            to="/credentials/history"
+            onClick={() => setSidebarOpen(false)}
+            className={({ isActive }) =>
+              `flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-semibold transition ${
+                isActive ? 'bg-brand-600 text-white' : 'text-slate-800 hover:bg-brand-50 dark:text-slate-100 dark:hover:bg-slate-800'
+              }`
+            }
+          >
+            <History className="h-5 w-5" />
+            History
+          </NavLink>
         </nav>
         <div className="mt-8 rounded-lg bg-slate-50 p-4 text-sm dark:bg-slate-950">
           <p className="font-semibold text-slate-900 dark:text-white">Verification readiness</p>

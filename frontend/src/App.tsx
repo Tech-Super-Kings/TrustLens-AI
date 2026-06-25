@@ -4,12 +4,16 @@ import { RoleRedirect } from './components/RoleRedirect';
 import { AuthLayout } from './layouts/AuthLayout';
 import { DashboardLayout } from './layouts/DashboardLayout';
 import { PublicLayout } from './layouts/PublicLayout';
+import { CredentialAnalysisPage } from './pages/CredentialAnalysisPage';
+import { CredentialHistoryPage } from './pages/CredentialHistoryPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { LandingPage } from './pages/LandingPage';
 import { LoginPage } from './pages/LoginPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { PasswordPlaceholderPage } from './pages/PasswordPlaceholderPage';
 import { RegisterPage } from './pages/RegisterPage';
+import { UploadCredentialPage } from './pages/UploadCredentialPage';
+import { VerificationReportPage } from './pages/VerificationReportPage';
 
 const App = () => (
   <Routes>
@@ -42,6 +46,12 @@ const App = () => (
         <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
           <Route path="/dashboard/admin" element={<DashboardPage role="admin" />} />
         </Route>
+        <Route element={<ProtectedRoute allowedRoles={['student', 'university', 'admin']} />}>
+          <Route path="/credentials/upload" element={<UploadCredentialPage />} />
+        </Route>
+        <Route path="/credentials/analysis" element={<CredentialAnalysisPage />} />
+        <Route path="/credentials/report/:id" element={<VerificationReportPage />} />
+        <Route path="/credentials/history" element={<CredentialHistoryPage />} />
       </Route>
     </Route>
 

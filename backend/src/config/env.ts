@@ -16,4 +16,5 @@ export const env = {
   jwtSecret: process.env.JWT_SECRET as string,
   jwtExpiresIn: process.env.JWT_EXPIRES_IN ?? '7d',
   clientUrl: process.env.CLIENT_URL ?? 'http://localhost:5173',
+  geminiApiKey: process.env.GEMINI_API_KEY,
 };
