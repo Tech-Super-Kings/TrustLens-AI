@@ -1,0 +1,20 @@
+{
+  "name": "trustlens-ai",
+  "version": "0.1.0",
+  "private": true,
+  "description": "TrustLens AI - AI-powered credential intelligence and blockchain verification platform.",
+  "scripts": {
+    "install:all": "npm install --workspaces",
+    "dev": "npm run dev --workspace frontend",
+    "dev:frontend": "npm run dev --workspace frontend",
+    "dev:backend": "npm run dev --workspace backend",
+    "build": "npm run build --workspaces",
+    "build:frontend": "npm run build --workspace frontend",
+    "build:backend": "npm run build --workspace backend",
+    "typecheck": "npm run typecheck --workspaces"
+  },
+  "workspaces": [
+    "frontend",
+    "backend"
+  ]
+}
